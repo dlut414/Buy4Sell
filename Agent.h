@@ -5,10 +5,10 @@
 #include <vector>
 #include <unordered_map>
 
-template <typename Market, typename Commodity>
+template <typename Mkt, typename Cmt>
 class Agent{
 public:
-	explicit Agent(const Market& m) : mkt(m){}
+	explicit Agent(const Mkt& m) : mkt(m){}
 	~Agent(){}
 	
 	void transaction(){}
@@ -16,8 +16,8 @@ public:
 	int ask(){}
 	
 private:
-	Market& mkt;
-	const std::vector<Commodity> necessities;
-	std::unordered_map<Commodity,int> holdings;
+	Mkt& mkt;
+	const std::vector<Cmt> necessities;
+	std::unordered_map<Cmt,int> holdings;
 	int life;
 };
