@@ -4,7 +4,6 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
-enum Commodity {};
 
 template <typename Market, typename Commodity>
 class Agent{
