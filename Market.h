@@ -15,6 +15,7 @@ public:
 	typedef std::unordered_map<Commodity,std::vector<Pii>> OrderBook_t;
 	explicit Market(){}
 	~Market(){}
+	bool transaction(){}
 	bool setBidOrder(const Order_t& order){
 		try{
 			bidOrder[order.first].push_back(order.second);
