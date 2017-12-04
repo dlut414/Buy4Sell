@@ -4,25 +4,30 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include <tuple>
+#include "Log.h"
 
 template <typename Mkt>
-class Agent{
+class Agent : public Log{
 public:
 	typedef typename Mkt::Commodity Cmt;
 	typedef typename Mkt::Order_t Order_t;
 	explicit Agent(const Mkt& m) : mkt(m){}
 	~Agent(){}
 	
+	bool deal(const Order_t){
+		
+	}
 	bool bid(const Cmt c, int num, int price){
 		try{
-			return mkt.setBidOrder({c, {num, price}});
+			return mkt.setBidOrder(this, std::make_tuple(c, num, price));
 		}catch(...){
 			return false;
 		}
 	}
 	bool ask(const Cmt c, int num, int price){
 		try{
-			return mkt.setAskOrder({c, {num, price}});
+			return mkt.setAskOrder(this, std::make_tuple(c, num, price));
 		}catch(...){
 			return false;
 		}
@@ -35,4 +40,5 @@ private:
 	std::unordered_map<Cmt,int> holdings;
 	int id;
 	int life;
+	int money;
 };
