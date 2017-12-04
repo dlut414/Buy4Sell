@@ -5,20 +5,29 @@
 #include <vector>
 #include <unordered_map>
 #include <pair>
-
-typedef std::pair<int,int> Pii; //nunber -> price
+#include <tuple>
+#include "Agent.h"
+using namespace std;
 
 template <typename Commodity>
 class Market{
 public:
-	typedef std::pair<Commodity,Pii> Order_t;
-	typedef std::unordered_map<Commodity,std::vector<Pii>> OrderBook_t;
+	typedef Commodity Cmt;
+	typedef Agent<Market<Cmt>>* AgentHandle_t;
+	typedef tuple<Cmt,AgentHandle_t,int,int> Order_t; //Commodity, AgentHandle, number, price
+	typedef unordered_map<Cmt,vector<tuple<AgentHandle_t,int,int>>> OrderBook_t;
 	explicit Market(){}
 	~Market(){}
-	bool transaction(){}
+	bool doTransaction(){
+		try{
+			
+		}catch(...){
+			return false;
+		}
+	}
 	bool setBidOrder(const Order_t& order){
 		try{
-			bidOrder[order.first].push_back(order.second);
+			bidOrder[get<0>(order)].push_back(make_tuple(get<1>(order),get<2>(order),get<3>(order)));
 			return true;
 		}catch(...){
 			return false;
@@ -26,7 +35,7 @@ public:
 	}
 	bool setAskOrder(const Order_t& order){
 		try{
-			askOrder[order.first].push_back(order.second);
+			askOrder[get<0>(order)].push_back(make_tuple(get<1>(order),get<2>(order),get<3>(order)));
 			return true;
 		}catch(...){
 			return false;

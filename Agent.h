@@ -8,22 +8,21 @@
 template <typename Mkt>
 class Agent{
 public:
-	typedef Mkt::Commodity Cmt;
-	typedef Mkt::Order_t Order_t;
+	typedef typename Mkt::Commodity Cmt;
+	typedef typename Mkt::Order_t Order_t;
 	explicit Agent(const Mkt& m) : mkt(m){}
 	~Agent(){}
 	
-	bool transaction(){}
 	bool bid(const Cmt c, int num, int price){
 		try{
-			mkt.setBidOrder({c, {num, price}});
+			return mkt.setBidOrder({c, {num, price}});
 		}catch(...){
 			return false;
 		}
 	}
 	bool ask(const Cmt c, int num, int price){
 		try{
-			mkt.setAskOrder({c, {num, price}});
+			return mkt.setAskOrder({c, {num, price}});
 		}catch(...){
 			return false;
 		}
@@ -34,5 +33,6 @@ private:
 	Mkt& mkt;
 	const std::vector<Cmt> necessities;
 	std::unordered_map<Cmt,int> holdings;
+	int id;
 	int life;
 };
