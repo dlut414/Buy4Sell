@@ -6,20 +6,30 @@
 #include <unordered_map>
 #include <pair>
 
-enum Commodity {};
 typedef std::pair<int,int> Pii; //nunber -> price
-typedef std::pair<Commodity,Pii> Order_t;
 
+template <typename Commodity>
 class Market{
 public:
+	typedef std::pair<Commodity,Pii> Order_t;
 	typedef std::unordered_map<Commodity,std::vector<Pii>> OrderBook_t;
-	Market(){}
+	explicit Market(){}
 	~Market(){}
 	bool setBidOrder(const Order_t& order){
-		bidOrder[order.first].push_back(order.second);
+		try{
+			bidOrder[order.first].push_back(order.second);
+			return true;
+		}catch(...){
+			return false;
+		}
 	}
 	bool setAskOrder(const Order_t& order){
-		askOrder[order.first].push_back(order.second);
+		try{
+			askOrder[order.first].push_back(order.second);
+			return true;
+		}catch(...){
+			return false;
+		}
 	}
 	const OrderBook_t& getBidOrder()const{
 		return bidOrder;

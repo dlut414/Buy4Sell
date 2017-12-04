@@ -5,15 +5,28 @@
 #include <vector>
 #include <unordered_map>
 
-template <typename Mkt, typename Cmt>
+template <typename Mkt>
 class Agent{
 public:
+	typedef Mkt::Commodity Cmt;
 	explicit Agent(const Mkt& m) : mkt(m){}
 	~Agent(){}
 	
-	void transaction(){}
-	int bid(){}
-	int ask(){}
+	bool transaction(){}
+	bool bid(){
+		try{
+			
+		}catch(...){
+			return false;
+		}
+	}
+	bool ask(){
+		try{
+			
+		}catch(...){
+			return false;
+		}
+	}
 	
 private:
 	Mkt& mkt;
