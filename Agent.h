@@ -65,11 +65,7 @@ public:
 	}
 	bool retrieveOrder(const size_t i){
 		try{
-			if( mkt.retrieveOrder(this, order_t() ) {
-				onOrder.erase(onOrder.begin()+i);
-				return true;
-			}
-			else return false;
+
 		}catch(...){
 			return false;
 		}
@@ -81,7 +77,8 @@ public:
 private:
 	Mkt& mkt;
 	const std::vector<Cmt> necessities;
-	std::vector<std::pair<bool,Order_t>> onOrder; //true for bid
+	std::vector<Order_t> bidOrder;
+	std::vector<Order_t> askOrder;
 	std::unordered_map<Cmt,int> holdings;
 	int money;
 	int id;

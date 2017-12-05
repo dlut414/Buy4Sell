@@ -77,7 +77,11 @@ public:
 		}
 	}
 	bool retrieveOrder(const AgentHandle_t ah, const Order_t& order){
-		
+		try{
+			
+		}catch(...){
+			return false;
+		}
 	}
 	const OrderBook_t& getBidOrder()const{
 		return bidOrder;
