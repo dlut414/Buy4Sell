@@ -35,8 +35,8 @@ public:
 					auto& nask = get<1>(askv[j]);
 					const int volume = min(nbid, nask);
 					const int price = (get<2>(bidv[i]) + get<2>(askv[j])) / 2;
-					get<0>(bidv[i])->deal(make_tuple(it->first, volume, price));
-					get<0>(askv[j])->deal(make_tuple(it->first, volume, price));
+					bool b = get<0>(bidv[i])->deal<true>(make_tuple(it->first, volume, price));
+					bool a = get<0>(askv[j])->deal<false>(make_tuple(it->first, volume, price));
 					nbid -= volume;
 					nask -= volume;
 					if(nbid != 0) i++;
@@ -54,6 +54,7 @@ public:
 						i--;
 					}
 				}
+				return a && b;
 			}
 		}catch(...){
 			return false;
