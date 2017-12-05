@@ -12,7 +12,7 @@ class Agent : public Log{
 public:
 	typedef typename Mkt::Commodity Cmt;
 	typedef typename Mkt::Order_t Order_t;
-	explicit Agent(const Mkt& m) : mkt(m){}
+	explicit Agent(const Mkt& m, const std::vector<Cmt>& nec) : mkt(m), necessities(nec){}
 	~Agent(){}
 	
 	template <bool IsBid>
@@ -37,19 +37,33 @@ public:
 	}
 	bool bid(const Cmt c, int num, int price){
 		try{
-			return mkt.setBidOrder(this, std::make_tuple(c, num, price));
+			const int total = num* price;
+			if(money < total) return false;
+			if( mkt.setBidOrder(this, std::make_tuple(c, num, price)) ) {
+				money -= total;
+				return true;
+			}
+			else return false;
 		}catch(...){
 			return false;
 		}
 	}
 	bool ask(const Cmt c, int num, int price){
 		try{
-			return mkt.setAskOrder(this, std::make_tuple(c, num, price));
+			if(!holdings.count(c) || holdings[c] < num) return false;
+			if( mkt.setAskOrder(this, std::make_tuple(c, num, price)) ){
+				holdings[c] -= num;
+				if(holdings[c] == 0) holdings.erase(c);
+				return true;
+			}
+			else return false;
 		}catch(...){
 			return false;
 		}
 	}
-	bool retrieveOrder(){}
+	bool retrieveOrder(){
+		
+	}
 	
 private:
 	Mkt& mkt;
