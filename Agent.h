@@ -16,20 +16,28 @@ public:
 	explicit Agent(const Mkt& m, const std::vector<Cmt>& nec) : mkt(m), necessities(nec){}
 	~Agent(){}
 	
-	template <bool IsBid>
-	bool deal(const Order_t order){}
-	template <>
-	bool deal<true>(const Order_t order){
+	bool dealBid(const Order_t order){
 		try{
+			for(auto it=bidOrder.begin();it!=bidOrder.end();++it){
+				if(*it == order) {
+					bidOrder.erase(it);
+					break;
+				}
+			}
 			holdings[std::get<0>(order)] += std::get<1>(order);
 			return true;
 		}catch(...){
 			return false;
 		}
 	}
-	template <>
-	bool deal<false>(const Order_t order){
+	bool dealAsk(const Order_t order){
 		try{
+			for(auto it=askOrder.begin();it!=askOrder.end();++it){
+				if(*it == order) {
+					askOrder.erase(it);
+					break;
+				}
+			}
 			money += std::get<1>(order) * std::get<2>(order);
 			return true;
 		}catch(...){
@@ -41,7 +49,7 @@ public:
 			const int total = num* price;
 			if(money < total) return false;
 			if( mkt.setBidOrder(this, Order_t(c, num, price)) ) {
-				onOrder.push_back({true, Order_t(c, num, price)});
+				bidOrder.push_back(Order_t(c, num, price));
 				money -= total;
 				return true;
 			}
@@ -54,7 +62,7 @@ public:
 		try{
 			if(!holdings.count(c) || holdings[c] < num) return false;
 			if( mkt.setAskOrder(this, Order_t(c, num, price)) ){
-				onOrder.push_back({false, Order_t(c, num, price)});
+				askOrder.push_back(Order_t(c, num, price));
 				holdings[c] -= num;
 				return true;
 			}
