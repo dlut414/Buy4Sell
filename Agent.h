@@ -4,6 +4,7 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include <pair>
 #include <tuple>
 #include "Log.h"
 
@@ -39,7 +40,8 @@ public:
 		try{
 			const int total = num* price;
 			if(money < total) return false;
-			if( mkt.setBidOrder(this, std::make_tuple(c, num, price)) ) {
+			if( mkt.setBidOrder(this, Order_t(c, num, price)) ) {
+				onOrder.push_back({true, Order_t(c, num, price)});
 				money -= total;
 				return true;
 			}
@@ -51,9 +53,9 @@ public:
 	bool ask(const Cmt c, int num, int price){
 		try{
 			if(!holdings.count(c) || holdings[c] < num) return false;
-			if( mkt.setAskOrder(this, std::make_tuple(c, num, price)) ){
+			if( mkt.setAskOrder(this, Order_t(c, num, price)) ){
+				onOrder.push_back({false, Order_t(c, num, price)});
 				holdings[c] -= num;
-				if(holdings[c] == 0) holdings.erase(c);
 				return true;
 			}
 			else return false;
@@ -64,10 +66,14 @@ public:
 	bool retrieveOrder(){
 		
 	}
+	void update(){
+		
+	}
 	
 private:
 	Mkt& mkt;
 	const std::vector<Cmt> necessities;
+	std::vector<std::pair<bool,Order_t>> onOrder; //true for bid
 	std::unordered_map<Cmt,int> holdings;
 	int money;
 	int id;
