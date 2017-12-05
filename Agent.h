@@ -63,8 +63,16 @@ public:
 			return false;
 		}
 	}
-	bool retrieveOrder(){
-		
+	bool retrieveOrder(const size_t i){
+		try{
+			if( mkt.retrieveOrder(this, order_t() ) {
+				onOrder.erase(onOrder.begin()+i);
+				return true;
+			}
+			else return false;
+		}catch(...){
+			return false;
+		}
 	}
 	void update(){
 		

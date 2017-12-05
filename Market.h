@@ -76,6 +76,9 @@ public:
 			return false;
 		}
 	}
+	bool retrieveOrder(const AgentHandle_t ah, const Order_t& order){
+		
+	}
 	const OrderBook_t& getBidOrder()const{
 		return bidOrder;
 	}
