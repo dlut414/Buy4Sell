@@ -64,25 +64,39 @@ public:
 			return false;
 		}
 	}
-	bool setBidOrder(const AgentHandle_t ah, const Order_t& order){
+	bool setBidOrder(const Cmt c, const Order_t& order){
 		try{
-			bidOrder[get<0>(order)].push_back(make_tuple(ah,get<1>(order),get<2>(order)));
+			bidOrder[c].push_back(order);
 			return true;
 		}catch(...){
 			return false;
 		}
 	}
-	bool setAskOrder(const AgentHandle_t ah, const Order_t& order){
+	bool setAskOrder(const Cmt c, const Order_t& order){
 		try{
-			askOrder[get<0>(order)].push_back(make_tuple(ah,get<1>(order),get<2>(order)));
+			askOrder[c].push_back(order);
 			return true;
 		}catch(...){
 			return false;
 		}
 	}
-	bool retrieveOrder(const AgentHandle_t ah, const Order_t& order){
+	bool retrieveOrder(const Cmt c, const uuid& id){
 		try{
-			
+			auto& bidv = bidOrder[c];
+			for(auto it=bidv.begin();it!=bidv.end();++it){
+				if(get<0>(*it) == id){
+					bidv.erase(it);
+					return true;
+				}
+			}
+			auto& askv = askOrder[c];
+			for(auto it=askv.begin();it!=askv.end();++it){
+				if(get<0>(*it) == id){
+					askv.erase(it);
+					return true;
+				}
+			}
+			return false;
 		}catch(...){
 			return false;
 		}
