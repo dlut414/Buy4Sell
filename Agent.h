@@ -4,10 +4,11 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
-#include <pair>
+#include <utility>
 #include <tuple>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
+#include <boost/functional/hash.hpp>
 #include "Log.h"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
@@ -16,9 +17,9 @@ typedef boost::hash<uuid> uuid_hash;
 template <typename Mkt>
 class Agent : public Log{
 public:
-	typedef typename Mkt::Commodity Cmt;
+	typedef typename Mkt::Cmt Cmt;
 	typedef std::tuple<Cmt,int,int> Order_t; //commodity, number, price
-	explicit Agent(const Mkt& m, const std::vector<Cmt>& nec) : mkt(m), necessities(nec){}
+	explicit Agent(Mkt& m, const std::vector<Cmt>& nec) : mkt(m), necessities(nec){}
 	~Agent(){}
 	
 	bool bid(const Cmt c, int num, int price){

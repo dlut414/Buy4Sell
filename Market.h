@@ -4,7 +4,7 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
-#include <pair>
+#include <utility>
 #include <tuple>
 #include <algorithm>
 #include <boost/uuid/uuid.hpp>
@@ -26,21 +26,22 @@ public:
 	~Market(){}
 	bool doTransaction(){
 		try{
+			bool b = true, a = true;
 			for(auto it=bidOrder.begin();it!=bidOrder.end();++it){
 				if(!askOrder.count(it->first)) continue;
 				auto& bidv = it->second;
 				auto& askv = askOrder[it->first];
 				if(bidv.empty() || askv.empty()) continue;
-				sort(bidv.begin(), bidv.end(), [](const auto& a, const auto& b){ return get<3>(a) < get<3>(b); });
-				sort(askv.begin(), askv.end(), [](const auto& a, const auto& b){ return get<3>(a) < get<3>(b); });
-				for(size_t i=bidv.size()-1, j=0;i>=0&&j<ask.size();i--,j++){
+				sort(bidv.begin(), bidv.end(), [](Order_t& p, Order_t& q){ return get<3>(p) < get<3>(q); });
+				sort(askv.begin(), askv.end(), [](Order_t& p, Order_t& q){ return get<3>(p) < get<3>(q); });
+				for(size_t i=bidv.size()-1, j=0;i>=0&&j<askv.size();i--,j++){
 					if(get<3>(bidv[i]) < get<3>(askv[j])) break;
 					auto& nbid = get<2>(bidv[i]);
 					auto& nask = get<2>(askv[j]);
 					const int volume = min(nbid, nask);
 					const int price = (get<3>(bidv[i]) + get<3>(askv[j])) / 2;
-					bool b = get<1>(bidv[i])->dealBid(get<0>(bidv[i]));
-					bool a = get<1>(askv[j])->dealAsk(get<0>(askv[j]));
+					b = b && get<1>(bidv[i])->dealBid(get<0>(bidv[i]));
+					a = a && get<1>(askv[j])->dealAsk(get<0>(askv[j]));
 					nbid -= volume;
 					nask -= volume;
 					if(nbid != 0) i++;

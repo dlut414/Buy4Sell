@@ -3,9 +3,11 @@
 ///2017.11~
 #pragma once
 #include <iostream>
-#define PRINT(x) (std::cout << "In file: " << __FILE__ << " @line: " << __LINE__ << #(x) << "=" << x << std::endl;)
+#include <string.h>
+#define __FILENAME__ (strrchr(__FILE__) ? (strrchr(__FILE__) + 1) : (__FILE__))
+#define PRINT(x) std::cout << "In file: " << __FILENAME__ << " @line: " << __LINE__ << #x << "=" << x << std::endl;
 
-class Log(){
+class Log{
 public:
 	explicit Log(){}
 	~Log(){}
