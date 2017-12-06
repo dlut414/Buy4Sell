@@ -19,7 +19,10 @@ class Agent : public Log{
 public:
 	typedef typename Mkt::Cmt Cmt;
 	typedef std::tuple<Cmt,int,int> Order_t; //commodity, number, price
-	explicit Agent(Mkt& m, const std::vector<Cmt>& nec) : mkt(m), necessities(nec){}
+	explicit Agent(Mkt& m, const std::vector<Cmt>& nec, const std::vector<Cmt>& holds, const uuid& _uid = random_generator()(), int _money = 100, int _life = 100) 
+	: mkt(m), necessities(nec), uid(_uid), money(_money), life(_life){
+		for(auto& i:holds) holdings[i]++;
+	}
 	~Agent(){}
 	
 	bool bid(const Cmt c, int num, int price){
@@ -97,12 +100,12 @@ public:
 	
 private:
 	Mkt& mkt;
+	uuid uid;
+	int money;
+	int life;
 	const std::vector<Cmt> necessities;
+	std::unordered_map<Cmt,int> holdings;
 	std::unordered_map<uuid,Order_t,uuid_hash> bidOrder;
 	std::unordered_map<uuid,Order_t,uuid_hash> askOrder;
-	std::unordered_map<Cmt,int> holdings;
-	int money;
-	int id;
-	int life;
 	random_generator gen;
 };
