@@ -7,9 +7,13 @@
 #include <pair>
 #include <tuple>
 #include <algorithm>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include "Log.h"
 #include "Agent.h"
 using namespace std;
+using boost::uuids::uuid;
+using boost::uuids::random_generator;
 
 template <typename Commodity>
 class Market : public Log{

@@ -6,6 +6,8 @@
 #include <unordered_map>
 #include <pair>
 #include <tuple>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include "Log.h"
 
 template <typename Mkt>
