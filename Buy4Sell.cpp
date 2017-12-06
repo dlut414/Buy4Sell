@@ -6,10 +6,11 @@
 #include "Market.h"
 #include "Agent.h"
 using namespace std;
+typedef int Cmt;
+typedef Market<Cmt> Mkt;
 int main(){
-	typedef int Cmt;
-	const vector<Cmt> vcmt;
-	Market<Cmt> mkt;
-	Agent<Market<Cmt>> agt(mkt, vcmt);
+	Mkt mkt;
+	Agent<Mkt> agt1(mkt, vector<Cmt>{1, 2, 3});
+	Agent<Mkt> agt2(mkt, vector<Cmt>{3, 4, 5});
 	return 0;
 }

@@ -9,19 +9,20 @@
 #include <algorithm>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
+#include <boost/functional/hash.hpp>
 #include "Log.h"
 #include "Agent.h"
 using namespace std;
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 
-template <typename Commodity>
+template <typename Commodity, typename Hash = boost::hash<Commodity>>
 class Market : public Log{
 public:
 	typedef Commodity Cmt;
 	typedef Agent<Market<Cmt>>* AgentHandle_t;
 	typedef tuple<uuid,AgentHandle_t,int,int> Order_t; //0:uuid, 1:AgentHandle_t, 2:number, 3:price
-	typedef unordered_map<Cmt,vector<Order_t>> OrderBook_t; //Commodity -> vector(Order_t)
+	typedef unordered_map<Cmt,vector<Order_t>,Hash> OrderBook_t; //Commodity -> vector(Order_t)
 	explicit Market(){}
 	~Market(){}
 	bool doTransaction(){
