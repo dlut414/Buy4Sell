@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -std=c++11
+CFLAGS=-c -Wall -std=c++14
 INC=-I ../extern/boost_1_65_1
 
 Buy4Sell.exe: Buy4Sell.o

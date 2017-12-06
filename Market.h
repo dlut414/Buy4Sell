@@ -32,8 +32,8 @@ public:
 				auto& bidv = it->second;
 				auto& askv = askOrder[it->first];
 				if(bidv.empty() || askv.empty()) continue;
-				sort(bidv.begin(), bidv.end(), [](Order_t& p, Order_t& q){ return get<3>(p) < get<3>(q); });
-				sort(askv.begin(), askv.end(), [](Order_t& p, Order_t& q){ return get<3>(p) < get<3>(q); });
+				sort(bidv.begin(), bidv.end(), [](auto& p, auto& q){ return get<3>(p) < get<3>(q); });
+				sort(askv.begin(), askv.end(), [](auto& p, auto& q){ return get<3>(p) < get<3>(q); });
 				for(size_t i=bidv.size()-1, j=0;i>=0&&j<askv.size();i--,j++){
 					if(get<3>(bidv[i]) < get<3>(askv[j])) break;
 					auto& nbid = get<2>(bidv[i]);
