@@ -35,7 +35,7 @@ public:
 				if(bidv.empty() || askv.empty()) continue;
 				sort(bidv.begin(), bidv.end(), [](auto& p, auto& q){ return get<3>(p) < get<3>(q); });
 				sort(askv.begin(), askv.end(), [](auto& p, auto& q){ return get<3>(p) < get<3>(q); });
-				for(auto i=bidv.rbegin(), j=askv.begin();i!=bidv.rend()&&j!=askv.end();i++,j++){
+				for(auto i=bidv.rbegin(), j=askv.begin();i!=bidv.rend()&&j!=askv.end();++i,++j){
 					if(get<3>(*i) < get<3>(*j)) break;
 					auto& nbid = get<2>(*i);
 					auto& nask = get<2>(*j);
@@ -45,8 +45,8 @@ public:
 					a = a && get<1>(*j)->dealAsk(get<0>(*j), volume, price);
 					nbid -= volume;
 					nask -= volume;
-					if(nbid != 0) i--;
-					if(nask != 0) j--;
+					if(nbid != 0) --i;
+					if(nask != 0) --j;
 				}
 				for(size_t i=0;i<bidv.size();i++){
 					if(get<2>(bidv[i]) == 0) {

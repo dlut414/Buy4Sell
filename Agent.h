@@ -8,6 +8,9 @@
 #include <tuple>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
+#ifdef DEBUG
+	#include <boost/uuid/uuid_io.hpp>
+#endif
 #include <boost/functional/hash.hpp>
 #include "Log.h"
 using boost::uuids::uuid;
