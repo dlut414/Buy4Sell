@@ -60,8 +60,8 @@ public:
 						i--;
 					}
 				}
-				return a && b;
 			}
+			return a && b;
 		}catch(...){
 			return false;
 		}
