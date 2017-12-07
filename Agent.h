@@ -58,10 +58,14 @@ public:
 		try{
 			bool ret = true;
 			if(bidOrder.count(id)) {
+				const auto& t = bidOrder[id];
+				money += std::get<1>(t) * std::get<2>(t);
 				ret = mkt.retrieveOrder(std::get<0>(bidOrder[id]), id);
 				ret = ret && bidOrder.erase(id);
 			}
-			else {
+			else if(askOrder.count(id)) {
+				const auto& t = askOrder[id];
+				holdings[std::get<0>(t)] += std::get<1>(t);
 				ret = mkt.retrieveOrder(std::get<0>(askOrder[id]), id);
 				ret = ret && askOrder.erase(id);
 			}
@@ -73,27 +77,27 @@ public:
 	void update(){
 		
 	}
-	bool dealBid(const uuid& id, int price){
+	bool dealBid(const uuid& id, int volume, int price){
 		try{
 			if(!bidOrder.count(id)) return false;
-			bool ret = true;
-			const auto& t = bidOrder[id];
-			holdings[std::get<0>(t)] += std::get<1>(t);
-			money += (std::get<2>(t) - price)* std::get<1>(t);
-			ret = ret && bidOrder.erase(id);
-			return ret;
+			auto& t = bidOrder[id];
+			holdings[std::get<0>(t)] += volume;
+			money += (std::get<2>(t) - price)* volume;
+			std::get<1>(t) -= volume;
+			if(std::get<1>(t) == 0) bidOrder.erase(id);
+			return true;
 		}catch(...){
 			return false;
 		}
 	}
-	bool dealAsk(const uuid& id, int price){
+	bool dealAsk(const uuid& id, int volume, int price){
 		try{
 			if(!askOrder.count(id)) return false;
-			bool ret = true;
-			const auto& t = askOrder[id];
-			money += std::get<1>(t) * price;
-			ret = ret && askOrder.erase(id);
-			return ret;
+			auto& t = askOrder[id];
+			money += volume * price;
+			std::get<1>(t) -= volume;
+			if(std::get<1>(t) == 0) askOrder.erase(id);
+			return true;
 		}catch(...){
 			return false;
 		}

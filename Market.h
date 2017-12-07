@@ -41,8 +41,8 @@ public:
 					auto& nask = get<2>(*j);
 					const int volume = min(nbid, nask);
 					const int price = (get<3>(*i) + get<3>(*j)) / 2;
-					b = b && get<1>(*i)->dealBid(get<0>(*i), price);
-					a = a && get<1>(*j)->dealAsk(get<0>(*j), price);
+					b = b && get<1>(*i)->dealBid(get<0>(*i), volume, price);
+					a = a && get<1>(*j)->dealAsk(get<0>(*j), volume, price);
 					nbid -= volume;
 					nask -= volume;
 					if(nbid != 0) i--;
