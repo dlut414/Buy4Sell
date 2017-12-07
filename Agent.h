@@ -73,24 +73,25 @@ public:
 	void update(){
 		
 	}
-	bool dealBid(const uuid& id){
+	bool dealBid(const uuid& id, int price){
 		try{
 			if(!bidOrder.count(id)) return false;
 			bool ret = true;
-			auto t = bidOrder[id];
+			const auto& t = bidOrder[id];
 			holdings[std::get<0>(t)] += std::get<1>(t);
+			money += (std::get<2>(t) - price)* std::get<1>(t);
 			ret = ret && bidOrder.erase(id);
 			return ret;
 		}catch(...){
 			return false;
 		}
 	}
-	bool dealAsk(const uuid& id){
+	bool dealAsk(const uuid& id, int price){
 		try{
 			if(!askOrder.count(id)) return false;
 			bool ret = true;
-			auto t = askOrder[id];
-			money += std::get<1>(t) * std::get<2>(t);
+			const auto& t = askOrder[id];
+			money += std::get<1>(t) * price;
 			ret = ret && askOrder.erase(id);
 			return ret;
 		}catch(...){
