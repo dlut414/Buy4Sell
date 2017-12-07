@@ -101,11 +101,11 @@ public:
 	
 private:
 	Mkt& mkt;
-	uuid uid;
-	int money;
-	int life;
 	const std::vector<Cmt> necessities;
 	std::unordered_map<Cmt,int> holdings;
+	const uuid uid;
+	int money;
+	int life;
 	std::unordered_map<uuid,Order_t,uuid_hash> bidOrder;
 	std::unordered_map<uuid,Order_t,uuid_hash> askOrder;
 	random_generator gen;
