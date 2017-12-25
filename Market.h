@@ -2,6 +2,8 @@
 ///author: HU FANGYUAN
 ///2017.11~
 #pragma once
+#include <iostream>
+#include <iomanip>
 #include <vector>
 #include <unordered_map>
 #include <utility>
@@ -108,6 +110,24 @@ public:
 	}
 	const OrderBook_t& getAskOrder()const{
 		return askOrder;
+	}
+	void showBidOrder()const{
+		cout << setw(11) << "Commodity" << setw(7) << "Number" << setw(7) << "Price" << endl;
+		for(auto it=bidOrder.begin();it!=bidOrder.end();++it){
+			for(auto itv=it->second.begin();itv!=it->second.end();++itv){
+				cout << setw(10) << it->first << " "
+					<< setw(6) << get<2>(itv->second) << " " << setw(6) << get<3>(itv->second) << endl;
+			}
+		}
+	}
+	void showBidOrder()const{
+		cout << setw(11) << "Commodity" << setw(7) << "Number" << setw(7) << "Price" << endl;
+		for(auto it=askOrder.begin();it!=askOrder.end();++it){
+			for(auto itv=it->second.begin();itv!=it->second.end();++itv){
+				cout << setw(10) << it->first << " "
+					<< setw(6) << get<2>(itv->second) << " " << setw(6) << get<3>(itv->second) << endl;
+			}
+		}
 	}
 private:
 	OrderBook_t bidOrder;

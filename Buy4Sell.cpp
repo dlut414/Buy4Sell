@@ -15,6 +15,8 @@ int main(){
 	Agent<Mkt> agt2(mkt, vector<Cmt>{3, 4}, vector<Cmt>{1, 1, 2, 2, 3, 3, 4, 4, 5, 5});
 	agt1.ask(4, 2, 10);
 	agt2.bid(4, 1, 16);
+	mkt.showBidOrder();
+	mkt.showAskOrder();
 	cout << "do transaction: " << mkt.doTransaction() << endl;
 	return 0;
 }
