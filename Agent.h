@@ -77,9 +77,6 @@ public:
 			return false;
 		}
 	}
-	void update(){
-		
-	}
 	bool dealBid(const uuid& id, int volume, int price){
 		try{
 			if(!bidOrder.count(id)) return false;

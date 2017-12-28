@@ -112,10 +112,6 @@ public:
 		return askOrder;
 	}
 	void showBidOrder()const{
-		if(bidOrder.empty()){
-			cout << " No bid order! " << endl;
-			return;
-		}
 		cout << setw(11) << "Commodity" << setw(7) << "Number" << setw(7) << "Price" << endl;
 		for(auto it=bidOrder.begin();it!=bidOrder.end();++it){
 			for(auto itv=it->second.begin();itv!=it->second.end();++itv){
@@ -125,10 +121,6 @@ public:
 		}
 	}
 	void showAskOrder()const{
-		if(askOrder.empty()){
-			cout << " No ask order! " << endl;
-			return;
-		}
 		cout << setw(11) << "Commodity" << setw(7) << "Number" << setw(7) << "Price" << endl;
 		for(auto it=askOrder.begin();it!=askOrder.end();++it){
 			for(auto itv=it->second.begin();itv!=it->second.end();++itv){
