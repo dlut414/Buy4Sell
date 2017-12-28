@@ -3,9 +3,13 @@
 ///2017.11~
 #pragma once
 #include "Log.h"
+#include "Market.h"
 
-class Strategy : public: Log{
+template <typename Mkt>
+class Strategy : public Log{
 public:
-	explicit Strategy(){}
+	explicit Strategy(const Mkt& m) : mkt(m){}
 	~Strategy(){}
+private:
+	const Mkt& mkt;
 };

@@ -13,6 +13,7 @@
 #endif
 #include <boost/functional/hash.hpp>
 #include "Log.h"
+#include "Strategy.h"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;
@@ -23,7 +24,7 @@ public:
 	typedef typename Mkt::Cmt Cmt;
 	typedef std::tuple<Cmt,int,int> Order_t; //commodity, number, price
 	explicit Agent(Mkt& m, const std::vector<Cmt>& nec, const std::vector<Cmt>& holds, const uuid& _uid = random_generator()(), int _money = 100, int _life = 100) 
-	: mkt(m), necessities(nec), uid(_uid), money(_money), life(_life){
+	: mkt(m), necessities(nec), uid(_uid), money(_money), life(_life), stg(m){
 		for(auto& i:holds) holdings[i]++;
 	}
 	~Agent(){}
@@ -113,4 +114,5 @@ private:
 	std::unordered_map<uuid,Order_t,uuid_hash> bidOrder;
 	std::unordered_map<uuid,Order_t,uuid_hash> askOrder;
 	random_generator gen;
+	Strategy<Mkt> stg;
 };
