@@ -2,8 +2,9 @@
 ///author: HU FANGYUAN
 ///2017.11~
 #pragma once
+#include "Log.h"
 
-class Strategy{
+class Strategy : public: Log{
 public:
 	explicit Strategy(){}
 	~Strategy(){}
