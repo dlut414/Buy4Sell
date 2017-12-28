@@ -17,6 +17,8 @@ int main(){
 	agt2.bid(4, 1, 16);
 	mkt.showBidOrder();
 	mkt.showAskOrder();
-	cout << "do transaction: " << mkt.doTransaction() << endl;
+	cout << "do transaction: " << (mkt.doTransaction() == 1 ? "Success" : "Fail") << endl;
+	mkt.showBidOrder();
+	mkt.showAskOrder();
 	return 0;
 }
