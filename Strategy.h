@@ -8,15 +8,15 @@ class StrategyBase : public Log{
 public:
 	StrategyBase() {}
 	~StrategyBase(){}
-	virtual void Act() = 0;
+	virtual void act(Log* const agt, Log* const mkt) = 0;
 };
 
 class Strategy_ : public StrategyBase{
 public:
 	Strategy_(){}
 	~Strategy_(){}
-	void Act(){
+	void act(Log* const agt, Log* const mkt){
+		std::cout << "success" << std::endl;
 		return;
 	}
-
 };
