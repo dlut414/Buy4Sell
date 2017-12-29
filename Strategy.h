@@ -3,13 +3,24 @@
 ///2017.11~
 #pragma once
 #include "Log.h"
-#include "Market.h"
 
 template <typename Mkt>
-class Strategy : public Log{
+class StrategyBase : public Log{
 public:
-	explicit Strategy(const Mkt& m) : mkt(m){}
-	~Strategy(){}
-private:
+	explicity StrategyBase(const Mkt& m) : mkt(m){}
+	~StrategyBase(){}
+	virtual void Act() = 0;
 	const Mkt& mkt;
+};
+
+template <typename Agt, typename Mkt>
+class Strategy_ : public StrategyBase<Mkt>{
+public:
+	explicit Strategy_(const Agt& a, const Mkt& m) : agt(a), StrategyBase::mkt(m){}
+	~Strategy_(){}
+	void Act(){
+		return;
+	}
+private:
+	const Agt* agt;
 };
