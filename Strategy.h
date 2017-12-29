@@ -16,7 +16,6 @@ public:
 	Strategy_(){}
 	~Strategy_(){}
 	void act(Log* const agt, Log* const mkt){
-		std::cout << "success" << std::endl;
 		return;
 	}
 };

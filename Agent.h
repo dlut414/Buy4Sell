@@ -13,10 +13,10 @@
 #endif
 #include <boost/functional/hash.hpp>
 #include "Log.h"
+#include "Strategy.h"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;
-class StrategyBase;
 
 template <typename Mkt>
 class Agent : public Log{
@@ -106,7 +106,7 @@ public:
 	}
 	bool act(){
 		try{
-			stg->act(this, &mkt);
+			return true;
 		}catch(...){
 			return false;
 		}
