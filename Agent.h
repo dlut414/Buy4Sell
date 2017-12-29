@@ -18,14 +18,14 @@ using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;
 
-template <typename Stg, typename Mkt>
+template <typename Mkt>
 class Agent : public Log{
 public:
 	typedef typename Mkt::Cmt Cmt;
 	typedef std::tuple<Cmt,int,int> Order_t; //commodity, number, price
-	explicit Agent(Mkt& m, const std::vector<Cmt>& nec, const std::vector<Cmt>& holds, 
+	explicit Agent(Mkt& m, const std::vector<Cmt>& nec, const std::vector<Cmt>& holds, const StrategyBase* stg_ptr,
 					const uuid& _uid = random_generator()(), int _money = 100, int _life = 100) 
-	: mkt(m), necessities(nec), uid(_uid), money(_money), life(_life), stg(new Stg(this, m)){
+	: mkt(m), necessities(nec), uid(_uid), money(_money), life(_life), stg(stg_ptr){
 		for(auto& i:holds) holdings[i]++;
 	}
 	~Agent(){}
@@ -115,5 +115,5 @@ private:
 	std::unordered_map<uuid,Order_t,uuid_hash> bidOrder;
 	std::unordered_map<uuid,Order_t,uuid_hash> askOrder;
 	random_generator gen;
-	StrategyBase* stg;
+	const StrategyBase* stg;
 };
