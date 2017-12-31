@@ -4,12 +4,11 @@
 #include <iostream>
 #include <vector>
 #define DEBUG
-#include "Market.h"
-#include "Agent.h"
+#include "common.hpp"
 using namespace std;
 typedef int Cmt;
-typedef Market<Cmt> Mkt;
-typedef Agent<Mkt> Agt;
+typedef Market Mkt;
+typedef Agent Agt;
 int main(){
 	Mkt mkt;
 	Agt agt1(mkt, vector<Cmt>{1, 3}, vector<Cmt>{1, 1, 2, 2, 3, 3, 4, 4, 5, 5}, new Strategy_);
@@ -21,5 +20,6 @@ int main(){
 	cout << " Do transaction: " << (mkt.doTransaction() ? "Success" : "Fail") << endl;
 	mkt.showBidOrder();
 	mkt.showAskOrder();
+	agt1.act();
 	return 0;
 }

@@ -2,20 +2,23 @@
 ///author: HU FANGYUAN
 ///2017.11~
 #pragma once
+#include "common.hpp"
 #include "Log.h"
 
 class StrategyBase : public Log{
 public:
 	StrategyBase() {}
 	~StrategyBase(){}
-	virtual void act(Log* const agt, Log* const mkt) = 0;
+	virtual void act(void* const agt, void* const mkt) = 0;
 };
 
 class Strategy_ : public StrategyBase{
 public:
 	Strategy_(){}
 	~Strategy_(){}
-	void act(Log* const agt, Log* const mkt){
+	void act(Agent* const agt, Market* const mkt){
+		const auto& bidOrder = mkt->getBidOrder();
+		std::cout << sizeof(bidOrder) << std::endl;
 		return;
 	}
 };

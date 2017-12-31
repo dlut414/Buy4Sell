@@ -14,6 +14,7 @@
 #endif
 #include "common.hpp"
 #include "Log.h"
+#include "Strategy.h"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;

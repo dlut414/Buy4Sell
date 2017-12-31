@@ -19,9 +19,9 @@ using boost::uuids::random_generator;
 
 class Market : public Log{
 public:
-	typedef Agent<Market>* AgentHandle_t;
+	typedef Agent* AgentHandle_t;
 	typedef tuple<uuid,AgentHandle_t,int,int> Order_t; //0:uuid, 1:AgentHandle_t, 2:number, 3:price
-	typedef unordered_map<int,vector<Order_t>,Hash> OrderBook_t; //Commodity -> vector(Order_t)
+	typedef unordered_map<int,vector<Order_t>> OrderBook_t; //Commodity -> vector(Order_t)
 	explicit Market();
 	~Market();
 	bool doTransaction();

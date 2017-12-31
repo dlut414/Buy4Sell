@@ -2,4 +2,5 @@
 *.obj
 *.exe
 *.out
+*.gch
 

@@ -1,7 +1,6 @@
 ///class header file for Market: handle market information
 ///author: HU FANGYUAN
 ///2017.11~
-#pragma once
 #include "Market.h"
 using namespace std;
 using boost::uuids::uuid;

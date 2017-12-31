@@ -1,7 +1,6 @@
 ///class header file for Agent
 ///author: HU FANGYUAN
 ///2017.11~
-#pragma once
 #include "Agent.h"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;

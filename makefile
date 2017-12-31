@@ -5,10 +5,12 @@ INC=-isystem ../extern/boost_1_65_1
 #Buy4Sell.exe: Buy4Sell.o Agent.o Market.o
 #	$(CC) $? -o $@
 
-Market.o: Market.h Market.cpp common.hpp Log.h
+all: Market.o Agent.o
+
+Market.o: Market.cpp Market.h common.hpp Log.h
 	$(CC) $(CFLAGS) $(INC) $< -o $@
-	
-Agent.o: Agent.h Agent.cpp common.hpp Log.h Strategy.h
+
+Agent.o: Agent.cpp Agent.h common.hpp Log.h Strategy.h
 	$(CC) $(CFLAGS) $(INC) $< -o $@
 	
 clean:
