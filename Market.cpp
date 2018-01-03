@@ -2,6 +2,7 @@
 ///author: HU FANGYUAN
 ///2017.11~
 #include "Market.h"
+#include "Agent.h"
 using namespace std;
 using boost::uuids::uuid;
 using boost::uuids::random_generator;

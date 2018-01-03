@@ -2,6 +2,7 @@
 ///author: HU FANGYUAN
 ///2017.11~
 #include "Agent.h"
+#include "Market.h"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;
