@@ -9,8 +9,8 @@ typedef boost::hash<uuid> uuid_hash;
 
 typedef Market Mkt;
 typedef std::tuple<int,int,int> Order_t; //commodity, number, price
-explicit Agent::Agent(Mkt& m, const std::vector<int>& nec, const std::vector<int>& holds, StrategyBase* stg_ptr,
-				const uuid& _uid = random_generator()(), int _money = 100, int _life = 100) 
+Agent::Agent(Mkt& m, const std::vector<int>& nec, const std::vector<int>& holds, StrategyBase* stg_ptr,
+				const uuid& _uid, int _money, int _life) 
 : mkt(m), necessities(nec), uid(_uid), money(_money), life(_life), stg(stg_ptr){
 	for(auto& i:holds) holdings[i]++;
 }

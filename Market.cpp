@@ -7,7 +7,7 @@ using namespace std;
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 
-explicit Market::Market(){}
+Market::Market(){}
 Market::~Market(){}
 bool Market::doTransaction(){
 	try{
@@ -19,7 +19,9 @@ bool Market::doTransaction(){
 			if(bidv.empty() || askv.empty()) continue;
 			sort(bidv.begin(), bidv.end(), [](auto& p, auto& q){ return get<3>(p) < get<3>(q); });
 			sort(askv.begin(), askv.end(), [](auto& p, auto& q){ return get<3>(p) < get<3>(q); });
-			for(auto i=bidv.rbegin(), j=askv.begin();i!=bidv.rend()&&j!=askv.end();++i,++j){
+			auto i=bidv.rbegin();
+			auto j=askv.begin();
+			for(;i!=bidv.rend()&&j!=askv.end();++i,++j){
 				if(get<3>(*i) < get<3>(*j)) break;
 				auto& nbid = get<2>(*i);
 				auto& nask = get<2>(*j);
