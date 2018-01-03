@@ -2,10 +2,8 @@ CC=g++
 CFLAGS=-c -Wall -std=c++14
 INC=-isystem ../extern/boost_1_65_1
 
-#Buy4Sell.exe: Buy4Sell.o Agent.o Market.o
-#	$(CC) $? -o $@
-
-all: Market.o Agent.o
+Buy4Sell.exe: Buy4Sell.o Agent.o Market.o
+	$(CC) $? -o $@
 
 Market.o: Market.cpp Market.h common.hpp Log.h
 	$(CC) $(CFLAGS) $(INC) $< -o $@

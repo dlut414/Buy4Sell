@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #define DEBUG
-#include "common.hpp"
+#include "Common.hpp"
 using namespace std;
 typedef int Cmt;
 typedef Market Mkt;
