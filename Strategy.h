@@ -9,7 +9,7 @@ class StrategyBase : public Log{
 public:
 	StrategyBase() {}
 	~StrategyBase(){}
-	virtual void act(void* const agt, void* const mkt) = 0;
+	virtual void act(Agent* const agt, Market* const mkt) = 0;
 };
 
 class Strategy_ : public StrategyBase{
