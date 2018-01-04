@@ -1,9 +1,9 @@
 ///cpp file for Strategy: handle Strategy for each Agent
 ///author: HU FANGYUAN
 ///2017.11~
-#include "Strategy.h"
-#include "Agent.h"
-#include "Market.h"
+#include "Strategy.hpp"
+#include "Agent.hpp"
+#include "Market.hpp"
 
 StrategyBase::StrategyBase() {}
 StrategyBase::~StrategyBase(){}

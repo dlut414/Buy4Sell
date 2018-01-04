@@ -1,8 +1,8 @@
 ///cpp file for Agent
 ///author: HU FANGYUAN
 ///2017.11~
-#include "Agent.h"
-#include "Market.h"
+#include "Agent.hpp"
+#include "Market.hpp"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;
@@ -10,7 +10,7 @@ typedef boost::hash<uuid> uuid_hash;
 typedef Market Mkt;
 typedef std::tuple<int,int,int> Order_t; //commodity, number, price
 Agent::Agent(Mkt& m, const std::vector<int>& nec, const std::vector<int>& holds, StrategyBase* stg_ptr,
-				const uuid& _uid, int _money, int _life) 
+				const uuid& _uid, int _money, int _life)
 : mkt(m), necessities(nec), uid(_uid), money(_money), life(_life), stg(stg_ptr){
 	for(auto& i:holds) holdings[i]++;
 }

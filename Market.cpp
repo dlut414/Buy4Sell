@@ -1,8 +1,8 @@
 ///cpp file for Market: handle market information
 ///author: HU FANGYUAN
 ///2017.11~
-#include "Market.h"
-#include "Agent.h"
+#include "Market.hpp"
+#include "Agent.hpp"
 using namespace std;
 using boost::uuids::uuid;
 using boost::uuids::random_generator;

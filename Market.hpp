@@ -12,7 +12,7 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include "common.hpp"
-#include "Log.h"
+#include "Log.hpp"
 using namespace std;
 using boost::uuids::uuid;
 using boost::uuids::random_generator;

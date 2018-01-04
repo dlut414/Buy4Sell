@@ -13,8 +13,8 @@
 	#include <boost/uuid/uuid_io.hpp>
 #endif
 #include "common.hpp"
-#include "Log.h"
-#include "Strategy.h"
+#include "Log.hpp"
+#include "Strategy.hpp"
 using boost::uuids::uuid;
 using boost::uuids::random_generator;
 typedef boost::hash<uuid> uuid_hash;

@@ -3,7 +3,7 @@
 ///2017.11~
 #pragma once
 #include "common.hpp"
-#include "Log.h"
+#include "Log.hpp"
 
 class StrategyBase : public Log{
 public:
