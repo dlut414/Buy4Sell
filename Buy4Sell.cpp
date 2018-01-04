@@ -4,9 +4,9 @@
 #include <iostream>
 #include <vector>
 #define DEBUG
+#include "Strategy.h"
 #include "Market.h"
 #include "Agent.h"
-#include "Strategy.h"
 using namespace std;
 typedef int Cmt;
 typedef Market Mkt;

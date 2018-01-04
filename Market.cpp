@@ -1,4 +1,4 @@
-///class header file for Market: handle market information
+///cpp file for Market: handle market information
 ///author: HU FANGYUAN
 ///2017.11~
 #include "Market.h"

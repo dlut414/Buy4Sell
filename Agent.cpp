@@ -1,4 +1,4 @@
-///class header file for Agent
+///cpp file for Agent
 ///author: HU FANGYUAN
 ///2017.11~
 #include "Agent.h"

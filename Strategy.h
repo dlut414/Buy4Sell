@@ -7,18 +7,14 @@
 
 class StrategyBase : public Log{
 public:
-	StrategyBase() {}
-	~StrategyBase(){}
-	virtual void act(Agent* const agt, Market* const mkt) = 0;
+	StrategyBase();
+	~StrategyBase();
+	virtual void act(Agent* const, Market* const) = 0;
 };
 
 class Strategy_ : public StrategyBase{
 public:
-	Strategy_(){}
-	~Strategy_(){}
-	void act(Agent* const agt, Market* const mkt){
-		const auto& bidOrder = mkt->getBidOrder();
-		std::cout << sizeof(bidOrder) << std::endl;
-		return;
-	}
+	Strategy_();
+	~Strategy_();
+	void act(Agent* const agt, Market* const mkt);
 };
